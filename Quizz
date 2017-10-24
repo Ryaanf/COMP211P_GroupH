@@ -1,0 +1,44 @@
+import java.util.Scanner
+
+public class Quizz
+{
+  Scanner scan = new Scanner(System.in);
+  public final string user; 
+  public final string pass;
+  public string USERNAME;
+  public string PASSWORD;
+  
+  
+ public void register() 
+ {
+  System.out.println("Enter your desired username:");
+  user = scan.nextLine
+  System.out.println("Enter your desired password:")
+  pass = scan.nextLine
+ }
+ 
+  
+  public void login()
+  {
+   System.out.println("Enter Username")
+   USERNAME = scan.nextLine 
+   System.out.println("Enter Passowrd")
+   PASSWORD = scan.nextLine 
+   
+   if (USERNAME.equals user && PASSWORD.equals pass)
+   {
+    System.out.println("successfully logged in");
+   }
+   
+   else 
+   {
+    System.out.println("Unalble to log in; check your username and password are correct.");
+   }
+  }
+   
+   public void about()
+   {
+    System.out.println("This is a vocabulary builder game designed to help learn the defenition of words by picking similar words from a list of synonyms!");
+   }
+   
+   
