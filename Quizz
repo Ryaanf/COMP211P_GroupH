@@ -17,7 +17,7 @@ public class Quizz
   pass = scan.nextLine
  }
  
-  
+  //Actually this would work better with a do-while loop right? so if they get it wrong it goes back to the start
   public void login()
   {
    System.out.println("Enter Username")
