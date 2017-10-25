@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-public class Quiz
+public class Quizz
 {
   Scanner scan = new Scanner(System.in);
   public final string user; 
