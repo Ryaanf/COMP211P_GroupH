@@ -1,0 +1,141 @@
+import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+
+/*
+ * Class to manage login and registration functions.
+ * Note: This class is unfinished. There is more to do here.
+ */
+
+/**
+ *
+ * @author rharbird
+ */
+public class PlayerList 
+{
+    private int maxNumberPlayers;
+    private Player[] registeredPlayers;
+    private int registeredSoFar;        // Number of players registered so far
+    private Player currentPlayer;
+    
+    
+    /**
+     Sets the maximum number of allowable elements to 10.
+    */
+    PlayerList( )
+    {
+        maxNumberPlayers = 10;
+        registeredPlayers = new Player[maxNumberPlayers];
+        registeredSoFar = 0;
+    }
+
+    /**
+     Precondition arraySize > 0.
+    */
+    PlayerList(int arraySize)
+    {
+        if (arraySize <= 0)
+        {
+            System.out.println("Error Array size zero or negative.");
+            System.exit(0);
+        }
+        maxNumberPlayers = arraySize;
+        registeredPlayers = new Player[maxNumberPlayers];
+        registeredSoFar = 0;
+    }
+    
+    //--------------------------------------------------------------------------
+    //  Register a player
+    //--------------------------------------------------------------------------    
+    public void register(Player aPlayer) 
+    {
+        if (registeredSoFar >= registeredPlayers.length)
+        {
+            System.out.println("Sorry! Maximum number of players (" + 
+                    maxNumberPlayers + ") already registered." );
+        }
+        else { // We haven't reached the maximum number of players.
+            
+             // Check whether the player is already registered
+            if (checkRegistered(aPlayer))
+            {
+                System.out.print("\n\tYou have already registered.");
+            }
+            else {
+                registeredPlayers[registeredSoFar] = aPlayer;
+                registeredSoFar++;
+            }
+        }        
+    }
+
+
+    //--------------------------------------------------------------------------
+    //  Checks whether there is a player already logged in.
+    //  Checks whether the player has registered by comparing the username with
+    //  players already registered.
+    //--------------------------------------------------------------------------
+    public void login(Player aPlayer) 
+    {
+        if (currentPlayer !=null)
+        {
+            System.out.println(currentPlayer.toString() + 
+                                ", has already logged in.");
+        }
+        else if (!checkRegistered(aPlayer))
+        {
+            System.out.println("\nYou must register before you login.");
+        }
+        else // The player hasn't registered
+        {
+                currentPlayer = aPlayer;
+        } 
+    }
+
+    //--------------------------------------------------------------------------
+    //  Check whether a player is already registered
+    //--------------------------------------------------------------------------        
+    private boolean checkRegistered(Player aPlayer)
+    {
+        boolean isRegistered = false;
+        
+        if (registeredSoFar != 0)
+        {
+            for (int i = 0; i < registeredSoFar; i++) {
+                if ( aPlayer.equals(registeredPlayers[i]))
+                {
+                        isRegistered = true;
+                }
+            }
+        }
+        return isRegistered; 
+    }
+    
+    
+    public void saveDetails(Player[] registeredPlayers) //this method goes through each player in the registeredPlayers array and writes their details to a txt file
+    {
+        PrintWriter outputStream = null;
+        try
+        {
+            outputStream = new PrintWriter(new FileOutputStream ("PlayerList.txt"));
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Error creating or opening the file PlayerList.txt");
+            System.exit(0);
+        }
+        
+        for(int i = 0; i < registeredSoFar; i++)
+        {
+         currentPlayer = registeredPlayers[i]; 
+            
+         outputStream.write(currentPlayer.getName() + ", ");
+         outputStream.write(currentPlayer.getPassword() + ", ");
+         outputStream.write(currentPlayer.getGames() + ", ");
+         outputStream.write(currentPlayer.getScore());
+         outputStream.println("");
+         outputStream.close();
+        }
+    }
+    
+}
