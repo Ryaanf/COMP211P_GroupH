@@ -1,0 +1,77 @@
+/**
+ *
+ * @author rharbird
+ */
+public class Player {
+    
+    String name;
+    String password;
+    int games;
+    int score;
+    
+    Player()
+    {
+        name = "NOT SET";
+        password = "NOT SET";
+    }
+    
+    Player(String aName, String aPassword)
+    {
+        name = aName;
+        password = aPassword;
+    }
+
+    public void setPassword(String thePassword) {
+        password = thePassword;
+    }
+
+    public void setName(String theName) {
+        name = theName;
+    }
+    
+    public void setGames(int noGames)
+    {
+        games = noGames;
+    }
+    
+    public void setScore(int theScore)
+    {
+        score = theScore;
+    }
+    
+    public String getName()
+    {
+         return name;
+    }
+
+    public String getPassword()
+    {
+         return name;
+    }    
+    
+    public int getGames()
+    {
+        return games;
+    }
+    
+    public int getScore()
+    {
+        return score;
+    }
+    
+    public String toString()
+    {
+         return "Player: " + name;
+    }  
+    
+    public boolean equals(Object otherObject)
+    {
+        if (otherObject == null)
+            return false;
+        
+        if (getClass() != otherObject.getClass())
+            return false;
+        Player otherPlayer = (Player) otherObject;
+        return (this.name.compareTo(otherPlayer.name) == 0);
+    }
+}
