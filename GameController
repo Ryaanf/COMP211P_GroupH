@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+/*
+ * 
+ * Wagoosh!!
+ *
+ */
+
+/**
+ *
+ * @author rharbird
+ */
+public class GameController {
+
+    final static int LIST_SIZE = 5;
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        PlayerList playerList = new PlayerList(LIST_SIZE);
+        Player aPlayer;
+        
+        char option = '*';
+        
+        while (option != 'q')
+        {
+            option = menu();
+
+            switch(option){
+                case 'l':
+                    aPlayer = inputDetails();
+                    playerList.login(aPlayer);
+                    break;
+                case 'r':
+                    aPlayer = inputDetails();
+                    playerList.register(aPlayer);
+                    break;
+                case 'q': 
+                    playerList.saveDetails(???); //idk what variable to put here?
+                    break;
+                default:
+                    System.out.println("Unknown option");
+                    break;
+            }
+        }
+
+        System.out.println("Bye, bye");
+    }
+    
+    private static char menu()
+    {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("\n\nWelcome to The Game:");
+    
+        System.out.println("\tLogin (L/l)");
+        System.out.println("\tRegister (R/r)");
+        System.out.println("\tQuit (Q/q)");
+        
+        System.out.print("\nPlease choose an option: ");
+        
+        return (scan.nextLine().toLowerCase().charAt(0));
+
+    }
+    
+   
+    //--------------------------------------------------------------------------
+    //  Inputs the details of a player passed as a parameter.
+    //--------------------------------------------------------------------------
+    private static Player inputDetails()
+    {
+        Player player = new Player();
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.print("\n\tEnter the player\'s login name: ");
+        player.setName(scan.nextLine());
+           
+        System.out.print("\n\tEnter the player\'s password: ");
+        player.setPassword(scan.nextLine());
+        
+        return player;
+    }
+
+
+}
