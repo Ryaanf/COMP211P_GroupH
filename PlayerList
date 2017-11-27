@@ -1,10 +1,11 @@
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /*
- * Class to manage login and registration functions.
+ * Class to manage login and regristration functions.
  * Note: This class is unfinished. There is more to do here.
  */
 
@@ -111,8 +112,13 @@ public class PlayerList
         return isRegistered; 
     }
     
+    public Player[] getArray()
+    {
+        return registeredPlayers;
+    }
     
-    public void saveDetails(Player[] registeredPlayers) //this method goes through each player in the registeredPlayers array and writes their details to a txt file
+   
+    public void saveDetails(Player[] registeredPlayers)
     {
         PrintWriter outputStream = null;
         try
@@ -126,16 +132,68 @@ public class PlayerList
         }
         
         for(int i = 0; i < registeredSoFar; i++)
-        {
-         currentPlayer = registeredPlayers[i]; 
-            
-         outputStream.write(currentPlayer.getName() + ", ");
-         outputStream.write(currentPlayer.getPassword() + ", ");
-         outputStream.write(currentPlayer.getGames() + ", ");
+        { 
+         
+         currentPlayer = registeredPlayers[i];
+          
+         outputStream.write(currentPlayer.getName() + ",");
+         outputStream.write(currentPlayer.getPassword() + ",");
+         outputStream.write(currentPlayer.getGames() + ",");
          outputStream.write(currentPlayer.getScore());
          outputStream.println("");
-         outputStream.close();
+         
         }
+        outputStream.close();    
+
     }
     
+   public void loadDetails(Player[] registeredPlayers) //this method reads the PlayerList.txt file, reads the string of details and then splits it up. It then loads the details into the array of registeredPlayers.
+    {
+        Scanner inputStream = null;
+        try
+        {
+            inputStream = new Scanner(new FileInputStream("PlayerList.txt"));
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Error creating or opening the file PlayerList.txt");
+            System.exit(0);
+        }
+     
+             
+                    
+    
+    for(int i = 0; inputStream.hasNextLine(); i++)
+        {
+         currentPlayer = registeredPlayers[i];
+         
+         String s = inputStream.nextLine();
+         String[] arrayDetails = s.split(",");
+         
+         for(int e = 0; e < arrayDetails.length; e++)
+         {
+             int Detailno = e;
+             switch (Detailno)
+             {
+             case 1: 
+                 currentPlayer.setName(arrayDetails[e]);
+                 break;
+             case 2:
+                 currentPlayer.setPassword(arrayDetails[e]);
+                 break;
+             case 3:
+                 currentPlayer.setGames(arrayDetails[e]);
+                 break;
+             case 4:
+                 currentPlayer.setScore(arrayDetails[e]);
+                 
+                 break;
+             }
+         }
+      inputStream.close();
+      
+    
 }
+   }
+}
+         
