@@ -1,0 +1,101 @@
+import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Ryaan
+ */
+public class QuizFileController {
+    
+    private int maxNumberQuestions;
+    private String[] questionsList;
+    private int questionsSoFar;
+    int i = 0;
+    
+    
+    QuizFileController()
+    {
+        maxNumberQuestions = 350;
+        questionsList = new String[maxNumberQuestions];
+        questionsSoFar = 0;
+    }
+    
+    
+    QuizFileController(int arraySize)
+    {
+        if (arraySize <= 0)
+        {
+            System.out.println("Error Array size zero or negative.");
+            System.exit(0);
+        }
+        maxNumberQuestions = arraySize;
+        questionsList = new String[maxNumberQuestions];
+        questionsSoFar = 0;
+    }
+    
+    public String[] getQuestionsArray()
+    {
+        return questionsList;
+    }
+    
+    
+    
+    public void loadQuestions(String[] questionsList)
+    {    
+    Scanner inputStream = null;
+        try
+        {
+            inputStream = new Scanner(new FileInputStream("mini_quiz.csv"));
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Error creating or opening the file mini_quiz.csv");
+            System.exit(0);
+        }
+        
+    while(inputStream.hasNext())
+    {
+        questionsList[i] = inputStream.nextLine();
+        i++;
+    }
+    
+    }
+    
+  
+    public void GetQuestions(String[] questionsList) {
+    
+    int[] NumberArray = new int [6];
+    String[] selectedQuestions = new String[6];
+    for (int k=0; k < 6; k++)
+    {
+        NumberArray[k] = (int)(Math.random() * 326);
+        {
+                    for (int j = 0; j < k ; j++)
+        {
+        while (NumberArray[k] == NumberArray[j])
+        {NumberArray[k] = (int)(Math.random() * 326);}
+        
+                }
+            }
+        }
+    
+    for (int x = 0; x < 6; x++)
+    {
+    selectedQuestions[x] = questionsList[NumberArray[x]];
+    }
+    
+    for (int e = 0; e < 6; e++)
+    {
+    System.out.println(selectedQuestions[e]);
+    }
+            }
+}
