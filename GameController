@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 /*
  * 
  * Wagoosh!!
@@ -13,14 +14,19 @@ import java.util.Scanner;
 public class GameController {
 
     final static int LIST_SIZE = 5;
-    
+    final static int QUESTLIST_SIZE = 350;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
         PlayerList playerList = new PlayerList(LIST_SIZE);
+        playerList.loadDetails(playerList.getArray());
+        QuizFileController questionsList = new QuizFileController(QUESTLIST_SIZE);
+        questionsList.loadQuestions(questionsList.getQuestionsArray());
+        questionsList.GetQuestions(questionsList.getQuestionsArray());
         Player aPlayer;
+        
         
         char option = '*';
         
@@ -38,14 +44,14 @@ public class GameController {
                     playerList.register(aPlayer);
                     break;
                 case 'q': 
-                    playerList.saveDetails(???); //idk what variable to put here?
-                    break;
-                default:
+                    playerList.saveDetails(playerList.getArray());
+                    break;       
+                default:   
                     System.out.println("Unknown option");
                     break;
             }
         }
-
+        
         System.out.println("Bye, bye");
     }
     
@@ -82,6 +88,12 @@ public class GameController {
         
         return player;
     }
-
-
-}
+    
+    
+        
+        
+      
+        
+            
+         
+    }
